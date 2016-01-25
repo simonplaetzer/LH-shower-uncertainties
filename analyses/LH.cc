@@ -322,8 +322,25 @@ struct LH_Z : public LH {
   }
 };
 
+struct LH_H_Heavy : public LH {
+  LH_H_Heavy() : LH("LH_H_Heavy", PID::HIGGS, 1) {
+    _mass = 500*GeV;
+    _jetptcut = 40*GeV;
+  }
+};
+
+struct LH_Z_Heavy : public LH {
+  LH_Z_Heavy() : LH("LH_Z_Heavy", PID::Z0, 1) {
+    _mass = 500*GeV;
+    _jetptcut = 40*GeV;
+  }
+};
+
+
   // The hook for the plugin system
   DECLARE_RIVET_PLUGIN(LH_H);
   DECLARE_RIVET_PLUGIN(LH_Z);
+  DECLARE_RIVET_PLUGIN(LH_H_Heavy);
+  DECLARE_RIVET_PLUGIN(LH_Z_Heavy);
 
 }
