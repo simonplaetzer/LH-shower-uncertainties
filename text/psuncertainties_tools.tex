@@ -1,3 +1,97 @@
-\section{TOOLS}
+\section{Tools}
 \label{sec:psunc:tools}
+
+\section{\Deductor}
+\label{sec:psunc:tools:decuctor}
+
+Deductor is a dipole shower with virtuality based ordering. It uses a color
+aproximation that goes beyond leading color (LC), namely the LC+
+approximation. This includes some -- but certainly not all -- corrections to
+order $1/N_c^4$. However, I tried the 500 GeV case with just LC and found that
+there is no substantial difference for the observables considered between LC
+and LC+. Rather, differences with other parton shower algorithms presumably
+come from a different ordering variable, different splitting functions, and a
+different recoil scheme.
+
+\section{\Herwig}
+\label{sec:psunc:tools:herwig}
+
+\section{\Pythia}
+\label{sec:psunc:tools:pythia}
+
+\section{\Sherpa}
+\label{sec:psunc:tools:sherpa}
+
+The \Sherpa Monte Carlo event generator \cite{Gleisberg:2008ta} in its latest
+release, \Sherpa-2.2.0, comprises two parton shower algorithms: \CSS
+\cite{Schumann:2007mg} and \Dire \cite{Hoche:2015sya}. While the \CSS bases on
+Catani-Seymour \cite{Catani:1996vz,Catani:2002hc} dipole splitting functions,
+\Dire combines the standard treatment of collinear configurations in parton
+showers with the resummation of soft logarithms in color dipole cascades. A
+third parton shower, \Ants \cite{ants}, is under development. \Ants bases on
+dipole splitting functions in the spirit of
+\cite{Winter:2007ye,Lonnblad:1992tz}.
+
+In general the splitting functions of all three algorithms take the 
+form 
+\begin{equation}
+  \begin{split}\label{eq:psunc:tools:sherpa:sf}
+    \mathrm{D}_{ijk}(t,z,\phi)
+    \,=\;& \frac{\alpha_s(k_\text{tune}b\,t)}{2\pi t}\;\mathrm{P}_{ijk}(z)
+  \end{split}
+\end{equation}
+where $b=1$ for \Dire. For \CSS and \Ants, $b=k_\text{CMW}$, where
+\begin{equation}
+  \begin{split}\label{eq:psunc:tools:sherpa:kcmw}
+    k_\text{CMW}
+    \,=\;&\exp\left[-\frac{67-3\pi^2-\tfrac{1}{3}\,n_f(t)}{33-2n_f(t)}\right]
+  \end{split}
+\end{equation}
+is the Catani-Marchesini-Webber scale factor \cite{Catani:1990rr}
+to incorporate dominating higher-logarithmic contributions and $n_f(t)$ 
+is the number of active flavours at scale $t$. The correction originating from
+$k_\text{CMW}$ is included in \Dire by multiplying the soft enhanced term of the
+splitting functions with $1+\alpha_s/(2\pi)\beta_0k_\text{CMW}$. The $k_\text{tune}$ 
+are manually inserted scale factors to accommodate one more degree-of-freedom 
+in a tuning context. However, in all current versions of the programs 
+$k_\text{tune}$ is fixed to 1 for final state splittings and $\tfrac{1}{2}$ 
+for initial state splittings in the \CSS, while \Ants and \Dire employ 
+$k_\text{tune}=1$ throughout. The $\mathrm{P}_{ijk}(z)$ are the shower 
+dependent splitting functions. 
+Since PDF uncertainties are not addressed here, cf.\ \ref{}, ratios of 
+PDFs are absorbed into the $\mathrm{P}_{ijk}(z)$.
+
+For the present study the showers run in their default setting.
+
+
+When now varying the argument of the strong coupling constant, i.e.\ 
+replacing $t\to ct$ the higher-logarithmic structure induced by the running 
+of the coupling constant in the presence of the CMW scale factor needs to be 
+preserved in order not to upset the resummation quality of the parton 
+shower. Thus, the following counter term is introduced
+\begin{equation}
+  \begin{split}\label{eq:psunc:tools:sherpa:asct}
+    \alpha_s(k_\text{tune}k_\text{CMW}\,t)
+    \,\to\;& \alpha_s(k_\text{tune}k_\text{CMW}\, c\cdot t)\cdot f(c,t)
+  \end{split}
+\end{equation}
+where two forms for the counter term $f(c,t)$ are implemented,
+\begin{equation}
+  \begin{split}\label{eq:psunc:tools:sherpa:asctfac}
+    f(c,t)
+    \,=\;&\left\{\begin{array}{ll}
+                  1-\sum_{i=0}^{n_\text{th}+1}\frac{\alpha_s}{2\pi}\,\beta_0(n_f(t))\,\log\frac{t_i}{t_{i-1}} & \text{additive threshold treatment}\\
+                  \prod_{i=0}^{n_\text{th}+1}\left(1-\frac{\alpha_s}{2\pi}\,\beta_0(n_f(t))\,\log\frac{t_i}{t_{i-1}}\right) & \text{multiplicative threshold treatment.}
+                 \end{array}\right.
+  \end{split}
+\end{equation}
+Therein, the sum and product run over the number $n_\text{th}$ of parton mass
+thresholds in the interval $[t,c\cdot t]$ with $t_0=t$,
+$t_{n_\text{th}+1}=c\cdot t$ and $t_i$ are the encompassed parton mass
+thresholds. If $c<1$, then the ordering is reversed recovering the correct
+sign. $\beta(n_f)$ is the QCD beta function. Obviously, both forms coincide if
+the interval $[t,c\cdot t]$ contains zero or one parton mass thresholds. For
+this study the additive threshold treatment was used. We vary the
+renormalization scale by a factor two, i.e.\ $c=4$ and $c=1/4$
+in~\ref{eq:psunc:tools:sherpa:asct}.
 
