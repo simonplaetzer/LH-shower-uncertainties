@@ -40,6 +40,71 @@ as a first indicator of the impact of non-perturbative corrections.
 
 \section{\Pythia}
 \label{sec:psunc:tools:pythia}
+In addition to the normal ordered $p_\perp$ evolution, the latest version of \Pythia \quad 
+contains a parton shower algorithm based on dipole type $p_\perp$-ordered evolution 
+which has been implemented in \Pythia-6.3 \cite{Sjostrand:2004ef}. This is used for both 
+ISR and FSR algorithms. Furthermore, \Pythia-8 \cite{Sjostrand:2007gs,Sjostrand:2014zea}
+contains implementation of $\gamma \to f \bar{f}, f=l,q$ splittings as a part of the 
+parton shower machinery in addition to the weak gauge boson emissions \cite{Christiansen:2014kba}. \\
+The evolution of parton showers is based on the DGLAP splitting kernels. For the case of one flavour, they are
+given by :
+\begin{eqnarray}
+ P_{q \to q g} (z) = C_F \frac{1 + z^2}{1 - z} \\
+ P_{g \to g g} (z) = C_A \frac{(1 - (1 - z) z)^2}{z (1-z)} \\
+ P_{g \to q \bar{q}} = T_R (z^2 + (1 - z)^2)
+\end{eqnarray}
+Where $C_F = 4/3$, $C_A = 3$ and $T_R=1/2$ are the QCD factors. For QED radiation, there are only 
+two splitting functions, $P_{f\to f \gamma} \text{ and } P_{\gamma \to f\bar{f}}$ which are given by :
+\begin{eqnarray}
+ P_{f \to f \gamma} (z) = Q_f^2 \frac{1 + z^2}{1 - z} \\
+ P_{\gamma \to f \bar{f}} = Q_f^2 N_C (z^2 + (1 - z)^2)
+\end{eqnarray}
+Where $Q_f$ is the electric charge of the fermion involved in the shower 
+and $N_C = 3$ for quarks and $N_C=1$ for leptons is the number of color degrees 
+of freedom. \\
+The DGLAP splitting kernels are considered as the basis of the ISR and FSR algorithms
+in \Pythia. They are casted as integro-differential equations whose solution
+is the probability of showering as one goes from one scale to a lower scale (the scale here 
+is the shower evolution variable). The differential equations driving the shower evolution 
+in \Pythia \quad are given by :
+\begin{eqnarray}
+ \frac{\text{d} \mathcal{P}_{\text{FSR}}}{\text{d} p_\perp^2} = \frac{1}{p_\perp^2} \int dz \frac{\alpha_s}{2 \pi} P(z) \\
+ \frac{\text{d} \mathcal{P}_{\text{ISR}}}{\text{d} p_\perp^2} = \frac{1}{p_\perp^2} \int dz \frac{\alpha_s}{2 \pi} P(z) 
+ \frac{f(x/z,p_\perp^2)}{z f(x,p_\perp^2)}
+\end{eqnarray}
+For ISR, $z=x/x'$ and $f(x/z,p_\perp^2)$ is the PDF of parton carrying a fraction $x/z$
+of the parent hadron at factorisation scale $p_\perp^2$. The evolution variable $p_\perp$ is defined in 
+\Pythia as:
+\begin{eqnarray}
+ p_{\perp,\text{evol}}^2 = p_\perp^2 = \bigg\{ \begin{array}{c}
+                            (1-z) Q^2 \quad \text{ for ISR} \\
+                            z (1-z) Q^2 \quad \text{ for FSR} \\
+                           \end{array}
+\end{eqnarray}
+Where $Q^2 > 0$ is the virtuality of the branching parton. \\
+The strength of the radiation is controlled by the effective value of the 
+strong coupling constant $\alpha_s(M_Z)$. In \Pythia, $\alpha_s$ can be 
+set separetely for ISR and FSR. The shower evolution scale is used as the 
+default renormalization scale for the evaluation of $\alpha_s$. Furthermore,
+in order to make uncertainty variations of the parton showers in \Pythia, a 
+multiplicative prefactor can be applied $\mu_R^2 = k_{\mu_R} p_{\perp, \text{evol}}$. The default 
+value is $k_{\mu_R} = 1$. \\
+We should note that in \Pythia, the value of $\alpha_s(M_Z)$ is not comparable
+to the $\alpha_s^{\overline{\text{MS}}}=0.118$ value. This is due to two reasons:
+\begin{itemize}
+ \item In the limit of soft-gluon emission, the dominant splitting function term,
+ can be absorbed into the LO splitting kernel by a translation to the Catani-Marchesini-Webber (CMW) scheme \cite{Catani:1990rr}:
+ \begin{eqnarray}
+  \alpha_s^{\text{CMW}} = \alpha_s^{\overline{\text{MS}}} \bigg(1 + K \frac{\alpha_s}{2 \pi} \bigg)
+ \end{eqnarray}
+where $K = C_A \bigg(\frac{67}{18} - \frac{1}{6} \pi^2 \bigg) - \frac{5}{9} n_f$
+\item The effective value of $\alpha_s(M_Z)$ tends to be a $10\%$ larger when tuned to the experimental
+data, i.e $\alpha_s(M_Z)^{\Pythia} \sim 0.139$ which is chosen as the default value.
+\end{itemize}
+The translation from the $\overline{\text{MS}}$ to the CMW scheme is equivalent
+to a specific shift of the renormalization scale, $\mu_R \to \mu_R \exp(-K/4\pi\beta_0)$. \\
+Finally, we note that corrections for parton masses are also avalaible for ISR \cite{Sjostrand:2004ef} 
+and FSR \cite{Norrbin:2000uu}.
 
 \section{\Sherpa}
 \label{sec:psunc:tools:sherpa}
