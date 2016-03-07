@@ -4,14 +4,15 @@
 \section{\Deductor}
 \label{sec:psunc:tools:decuctor}
 
-Deductor is a dipole shower with virtuality based ordering. It uses a color
-aproximation that goes beyond leading color (LC), namely the LC+
-approximation. This includes some -- but certainly not all -- corrections to
-order $1/N_c^4$. However, I tried the 500 GeV case with just LC and found that
-there is no substantial difference for the observables considered between LC
-and LC+. Rather, differences with other parton shower algorithms presumably
-come from a different ordering variable, different splitting functions, and a
-different recoil scheme.
+\Deductor \cite{Nagy:2014mqa,Nagy:2014oqa,Nagy:2014nqa,Nagy:2015hwa} is a
+dipole shower with virtuality based ordering. It uses a color aproximation
+that goes beyond leading color (LC), namely the LC+ approximation. This
+includes some -- but certainly not all -- corrections to order $1/N_c^4$. For
+$e^+e^-$ collissions at $500\ {\rm GeV}$ no substantial difference for the
+observables considered between LC and LC+ has been found.  \Deductor uses a
+two-loop running of $\alpha_s$ with $\alpha_s(M_Z)=0.118$ and a parton shower
+cutoff of $1\ {\rm GeV}$, and implements the CMW prescription
+\cite{Catani:1990rr} through a scaling of the argument of $\alpha_s$.
 
 \section{\Herwig}
 \label{sec:psunc:tools:herwig}
@@ -92,8 +93,9 @@ value is $k_{\mu_R} = 1$. \\
 We should note that in \Pythia, the value of $\alpha_s(M_Z)$ is not comparable
 to the $\alpha_s^{\overline{\text{MS}}}=0.118$ value. This is due to two reasons:
 \begin{itemize}
- \item In the limit of soft-gluon emission, the dominant splitting function term,
- can be absorbed into the LO splitting kernel by a translation to the Catani-Marchesini-Webber (CMW) scheme \cite{Catani:1990rr}:
+ \item In the limit of soft-gluon emission, the dominant splitting function
+   term, can be absorbed into the LO splitting kernel by a translation to the
+   Catani-Marchesini-Webber (CMW) scheme \cite{Catani:1990rr}:
  \begin{eqnarray}
   \alpha_s^{\text{CMW}} = \alpha_s^{\overline{\text{MS}}} \bigg(1 + K \frac{\alpha_s}{2 \pi} \bigg)
  \end{eqnarray}
