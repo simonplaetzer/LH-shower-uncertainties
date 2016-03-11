@@ -1,20 +1,21 @@
 \documentclass[11pt]{cernrep}
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx,epsfig}
 \usepackage{amsmath}
-\bibliographystyle{lesHouches}
-\usepackage[utf8]{inputenc}
-
+\usepackage{xspace}
 \usepackage{subcaption}
+\bibliographystyle{lesHouches}
 
-\newcommand{\QTilde}{\textsf{QTilde Shower}}
-\newcommand{\Dipoles}{\textsf{Dipole Shower}}
-\newcommand{\Deductor}{\textsf{Deductor}}
-\newcommand{\Dire}{\textsf{Dire}}
-\newcommand{\CSS}{\textsf{CSS}}
-\newcommand{\Herwig}{\textsf{Herwig}}
-\newcommand{\Pythia}{\textsf{Pythia}}
-\newcommand{\Ants}{\textsf{Ants}}
-\newcommand{\Sherpa}{\textsf{Sherpa}}
+% definitions
+\newcommand{\QTilde}{\protect\textsf{QTilde Shower}\xspace}
+\newcommand{\Dipoles}{\protect\textsf{Dipole Shower}\xspace}
+\newcommand{\Deductor}{\protect\textsf{Deductor}\xspace}
+\newcommand{\Herwig}{\protect\textsf{Herwig}\xspace}
+\newcommand{\Pythia}{\protect\textsf{Pythia}\xspace}
+\newcommand{\Sherpa}{\protect\textsc{Sherpa}\xspace}
+\newcommand{\Ants}{\protect\textsc{Ants}\xspace}
+\newcommand{\CSS}{\protect\textsc{Csshower}\xspace}
+\newcommand{\Dire}{\protect\textsc{Dire}\xspace}
 
 \def\GeV{~\textrm{GeV}}
 
@@ -24,20 +25,23 @@
 \title{Towards parton shower variations}
 
 \author{
-  S.\ Pl\"atzer$^1$,
-  M.\ Sch\"onherr$^2$,
-  ...
+  S.\ H\"oche$^1$,
+  S.\ Pl\"atzer$^2$,
+  M.\ Sch\"onherr$^3$,
+  K.\ Zapp$^4$
 }
 \institute{
   $^1$ \\
-  $^2$ 
+  $^2$ \\
+  $^3$ \\
+  $^4$ 
 }
 
 \maketitle
 
 \begin{abstract}
   We detail developments to evaluate parton shower uncertainties 
-  for $e^+e^-\to\text{jets}$, $pp\to h$ and $pp\to e^+e^-$.
+  for $e^+e^-\to\text{jets}$, $pp\to h$ and $pp\to Z$.
 \end{abstract}
 
 \input{psuncertainties_intro}
