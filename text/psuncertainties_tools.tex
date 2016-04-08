@@ -41,12 +41,12 @@ as a first indicator of the impact of non-perturbative corrections.
 
 \subsection{\Pythia}
 \label{sec:psunc:tools:pythia}
-In addition to the normal ordered $p_\perp$ evolution, the latest version of \Pythia \quad 
-contains a parton shower algorithm based on dipole type $p_\perp$-ordered evolution 
-which has been implemented in \Pythia-6.3 \cite{Sjostrand:2004ef}. This is used for both 
-ISR and FSR algorithms. Furthermore, \Pythia-8 \cite{Sjostrand:2007gs,Sjostrand:2014zea}
-contains implementation of $\gamma \to f \bar{f}, f=l,q$ splittings as a part of the 
-parton shower machinery in addition to the weak gauge boson emissions \cite{Christiansen:2014kba}. \\
+The parton showers in \Pythia-8 are based on the dipole type $p_\perp$-ordered
+evolution which has been available since \Pythia-6.3 \cite{Sjostrand:2004ef}. 
+This is used for both ISR and FSR algorithms. Furthermore, \Pythia-8 \cite{Sjostrand:2007gs,Sjostrand:2014zea}
+contains an implementation of $\gamma \to f \bar{f}, f = l,q$ splittings 
+as a part of the parton-shower machinery, as well as weak gauge boson emissions \cite{Christiansen:2014kba}
+(The latter are however not included in this study.) \\
 The evolution of parton showers is based on the DGLAP splitting kernels. For the case of one flavour, they are
 given by :
 \begin{eqnarray}
@@ -54,7 +54,8 @@ given by :
  P_{g \to g g} (z) = C_A \frac{(1 - (1 - z) z)^2}{z (1-z)} \\
  P_{g \to q \bar{q}} = T_R (z^2 + (1 - z)^2)
 \end{eqnarray}
-Where $C_F = 4/3$, $C_A = 3$ and $T_R=1/2$ are the QCD factors. For QED radiation, there are only 
+where $z$ is the energy fraction and $C_F = 4/3$, $C_A = 3$
+and $T_R=1/2$ are the QCD factors. For QED radiation, there are only 
 two splitting functions, $P_{f\to f \gamma} \text{ and } P_{\gamma \to f\bar{f}}$ which are given by :
 \begin{eqnarray}
  P_{f \to f \gamma} (z) = Q_f^2 \frac{1 + z^2}{1 - z} \\
@@ -63,17 +64,16 @@ two splitting functions, $P_{f\to f \gamma} \text{ and } P_{\gamma \to f\bar{f}}
 Where $Q_f$ is the electric charge of the fermion involved in the shower 
 and $N_C = 3$ for quarks and $N_C=1$ for leptons is the number of color degrees 
 of freedom. \\
-The DGLAP splitting kernels are considered as the basis of the ISR and FSR algorithms
-in \Pythia. They are casted as integro-differential equations whose solution
-is the probability of showering as one goes from one scale to a lower scale (the scale here 
-is the shower evolution variable). The differential equations driving the shower evolution 
+The ISR and FSR algorithms are cast as integro-differential equations whose solution
+is the probability of showering as one goes from one (shower-evolution) scale to a lower scale. 
+The differential equations driving the shower evolution 
 in \Pythia \quad are given by :
 \begin{eqnarray}
  \frac{\text{d} \mathcal{P}_{\text{FSR}}}{\text{d} p_\perp^2} = \frac{1}{p_\perp^2} \int dz \frac{\alpha_s}{2 \pi} P(z) \\
  \frac{\text{d} \mathcal{P}_{\text{ISR}}}{\text{d} p_\perp^2} = \frac{1}{p_\perp^2} \int dz \frac{\alpha_s}{2 \pi} P(z) 
  \frac{f(x/z,p_\perp^2)}{z f(x,p_\perp^2)}
 \end{eqnarray}
-For ISR, $z=x/x'$ and $f(x/z,p_\perp^2)$ is the PDF of parton carrying a fraction $x/z$
+For ISR, $z=x/x'$ and $f(x/z,p_\perp^2)$ is the PDF of the new parent parton carrying a fraction $x/z$
 of the parent hadron at factorisation scale $p_\perp^2$. The evolution variable $p_\perp$ is defined in 
 \Pythia as:
 \begin{eqnarray}
@@ -82,13 +82,13 @@ of the parent hadron at factorisation scale $p_\perp^2$. The evolution variable 
                             z (1-z) Q^2 \quad \text{ for FSR} \\
                            \end{array}
 \end{eqnarray}
-Where $Q^2 > 0$ is the virtuality of the branching parton. \\
+where $Q^2 > 0$ is the virtuality of the branching parton. \\
 The strength of the radiation is controlled by the effective value of the 
 strong coupling constant $\alpha_s(M_Z)$. In \Pythia, $\alpha_s$ can be 
-set separetely for ISR and FSR. The shower evolution scale is used as the 
-default renormalization scale for the evaluation of $\alpha_s$. Furthermore,
+set separetely for ISR and FSR. The shower evolution scale ($p_{\perp;\mathrm{evol}}$) is used as the default renormalization scale
+for the evaluation of $\alpha_s$. Furthermore,
 in order to make uncertainty variations of the parton showers in \Pythia, a 
-multiplicative prefactor can be applied $\mu_R^2 = k_{\mu_R} p_{\perp, \text{evol}}$. The default 
+multiplicative prefactor can be applied $\mu_R^2 = k_{\mu_R} p_{\perp, \text{evol}}^2$. The default 
 value is $k_{\mu_R} = 1$. \\
 We should note that in \Pythia, the value of $\alpha_s(M_Z)$ is not comparable
 to the $\alpha_s^{\overline{\text{MS}}}=0.118$ value. This is due to two reasons:
@@ -113,11 +113,11 @@ and FSR \cite{Norrbin:2000uu}.
 
 The \Sherpa Monte Carlo event generator \cite{Gleisberg:2008ta} in its latest
 release, \Sherpa-2.2.0, comprises two parton shower algorithms: \CSS
-\cite{Schumann:2007mg} and \Dire \cite{Hoche:2015sya}. While the \CSS bases on
+\cite{Schumann:2007mg} and \Dire \cite{Hoche:2015sya}. While the \CSS is based on
 Catani-Seymour \cite{Catani:1996vz,Catani:2002hc} dipole splitting functions,
 \Dire combines the standard treatment of collinear configurations in parton
 showers with the resummation of soft logarithms in color dipole cascades. A
-third parton shower, \Ants \cite{ants}, is under development. \Ants bases on
+third parton shower, \Ants \cite{ants}, is under development. \Ants is based on
 dipole splitting functions in the spirit of
 \cite{Winter:2007ye,Lonnblad:1992tz}.
 
